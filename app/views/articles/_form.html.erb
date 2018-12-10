@@ -1,0 +1,25 @@
+<%= form_with(model: article, local: true) do |form| %>
+  <% if article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+      <% article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :list_id %>
+    <%= form.select :list_id, current_user.lists.all.map { |u| [u.title, u.id]} %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :url %>
+    <%= form.text_area :url, class: "form-control" %>
+  </div>
+
+  <%= form.submit class: "btn btn-primary" %>
+<% end %>
