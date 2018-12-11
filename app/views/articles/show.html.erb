@@ -1,18 +1,33 @@
 <div class="container">
 
 	<p>
-	  <strong>User:</strong>
-	  <%= @article.user.email %>
+	  <strong>Title:</strong>
+	  <%= @article.title %>
+	</p>
+
+	<p>
+	  <strong>Description:</strong>
+	  <%= @article.description %>
+	</p>
+
+	<p>
+	  <strong>Site Name:</strong>
+	  <%= @article.site_name %>
+	</p>
+
+	<p>
+	  <strong>Image URL:</strong>
+	  <%= @article.image %>
+	</p>
+
+	<p>
+	  <strong>Updated Time:</strong>
+	  <%= @article.updated_time %>
 	</p>
 
 	<p>
 	  <strong>List:</strong>
-	  <%= @article.list.title %>
-	</p>
-
-	<p>
-	  <strong>URL:</strong>
-	  <%= @article.url %>
+	  <%= @article.list_id.title %>
 	</p>
 
 	<% if @article.user == current_user %>

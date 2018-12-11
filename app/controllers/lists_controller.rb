@@ -14,7 +14,7 @@ class ListsController < InheritedResources::Base
   def create
     @list = current_user.lists.new(list_params)
     if @list.save
-      redirect_to @list, notice: 'Article was successfully created.'
+      redirect_to @list, notice: 'List was successfully created.'
     else
       render :new 
     end
@@ -24,7 +24,7 @@ class ListsController < InheritedResources::Base
   def update
     @list = current_user.list.find(params[:id])
     if @list.update(list_params)
-      redirect_to @list, notice: 'Article was successfully updated.'
+      redirect_to @list, notice: 'List was successfully updated.'
     else
       render :edit
     end
@@ -34,7 +34,7 @@ class ListsController < InheritedResources::Base
   def destroy
     @list = current_user.lists.find(params[:id])
     @list.destroy
-    redirect_to lists_url, notice: 'Article was successfully destroyed.'
+    redirect_to lists_url, notice: 'List was successfully destroyed.'
   end
 
   private

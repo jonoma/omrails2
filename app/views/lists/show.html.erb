@@ -1,37 +1,30 @@
 <div class="container">
 
-	<p>
-	  <strong>User:</strong>
-	  <%= @list.user.email %>
-	</p>
+	<br>
 
-	<p>
-	  <strong>Title:</strong>
-	  <%= @list.title %>
-	</p>
+	<h1><%= @list.title %></h1>
 
-	<table class="table">
-	  <thead class="thead-dark">
-	    <tr>
-	      <th>URL</th>
-	      <th colspan="3"></th>
-	    </tr>
-	  </thead>
+	<table class="table table-borderless">
 
 	  <tbody>
 	    <% @list.articles.each do |article| %>
-	      <tr>
-	        <% if article.user == current_user %>
-	        	<td><%= article.url %></td>
-	        	<td><%= link_to 'Show', article %></td>
-	          <td><%= link_to 'Edit', edit_article_path(article) %></td>
-	          <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-	        <% end %>
-	      </tr>
+	      <% if article.user == current_user %>
+	      	<tr>
+	      		<td><b><%= article.title %></b></td>
+	        	<td><%= article.site_name %></td>
+        	</tr>
+	      	<tr>	        
+	        	<td><%= article.description %></td>
+        	</tr>
+        	<tr>
+	        	<td><a href="<%= article.url %>">Read More</a></td>
+	          <td><%= link_to 'Delete', article, :list_id => params[:id], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	      	</tr>
+	      <% end %>
 	    <% end %>
-	    	<tr>
-	    		<td><%= render 'form', list: @list %></td>
-	    	</tr>
+    	<tr>
+    		<td><%= render 'form', list: @list %></td>
+    	</tr>
 	  </tbody>
 	</table>
 
