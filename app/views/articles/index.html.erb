@@ -1,35 +1,33 @@
 <div class="container">
 
-  <h1>Articles</h1>
-
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th>User</th>
-        <th>URL</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @articles.each do |article| %>
-        <tr>
-          <td><%= article.user.email %></td>
-          <td><%= article.url %></td>
-          <td><%= link_to 'Show', article %></td>
-          <% if article.user == current_user %>
-            <td><%= link_to 'Edit', edit_article_path(article) %></td>
-            <td><%= link_to 'Delete', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% end %>
-        </tr>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= current_user.email %></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <% if user_signed_in? %>
+        <%= link_to 'New Article', new_article_path %>
       <% end %>
-    </tbody>
-  </table>
-
-  <br>
-
-  <% if user_signed_in? %>
-    <%= link_to 'New Article', new_article_path %>
-  <% end %>
-
+      <div class="list-group">
+        <% @articles.each do |article| %>
+          <%= link_to article, class: "list-group-item list-group-item-action flex-column align-items-start" do %>
+            <div class="d-flex w-100 justify-content-between">
+              <p class="list-group-item-heading"><%= article.title %></p>
+              <small><%= article.user.email %></small>
+            </div>
+          <% end %>       
+        <% end %>
+      </div>
+          
+      <br>
+    </div>
+  </div>
 </div>

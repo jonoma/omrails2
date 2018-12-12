@@ -1,38 +1,26 @@
 <div class="container">
-
-	<br>
-
-	<h1><%= @list.title %></h1>
-
-	<table class="table table-borderless">
-
-	  <tbody>
-	    <% @list.articles.each do |article| %>
-	      <% if article.user == current_user %>
-	      	<tr>
-	      		<td><b><%= article.title %></b></td>
-	        	<td><%= article.site_name %></td>
-        	</tr>
-	      	<tr>	        
-	        	<td><%= article.description %></td>
-        	</tr>
-        	<tr>
-	        	<td><a href="<%= article.url %>">Read More</a></td>
-	          <td><%= link_to 'Delete', article, :list_id => params[:id], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-	      	</tr>
-	      <% end %>
-	    <% end %>
-    	<tr>
-    		<td><%= render 'form', list: @list %></td>
-    	</tr>
-	  </tbody>
-	</table>
-
-	<br>
-
-	<% if user_signed_in? %>
-	  <%= link_to 'Edit', edit_list_path(@list) %> |
-	  <%= link_to 'Back', lists_path %>
-	<% end %>
-
+	<div class="row">
+		<div class="offset-md-2 col-md-8">
+			<h1><%= @list.title %></h1>
+			<% @list.articles.each do |article| %>
+				<div class="card">
+				  <div class="card-body">
+				    <h5 class="card-title"><%= article.title %></h5>
+				    <h6 class="card-subtitle mb-2 text-muted"><%= article.site_name %></h6>
+				    <p class="card-text"><%= article.description %></p>
+				    <small><%= link_to 'Read More', article.url %></small>
+				    <% if article.user == current_user %>
+							<small>|<%= link_to 'Edit', article %></small>
+							<small>|<%= link_to 'Delete', article, :list_id => params[:id], method: :delete, data: { confirm: 'Are you sure?' } %></small>
+						<% end %>
+					</div>
+				</div>
+			<% end %>
+			<% if user_signed_in? %>
+			  <%= link_to 'Add Article', new_article_path %> |
+			  <%= link_to 'Edit', edit_list_path(@list) %> |
+			  <%= link_to 'Back', lists_path %>
+			<% end %>
+		</div>
+	</div>
 </div>

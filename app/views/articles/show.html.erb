@@ -1,38 +1,18 @@
 <div class="container">
-
-	<p>
-	  <strong>Title:</strong>
-	  <%= @article.title %>
-	</p>
-
-	<p>
-	  <strong>Description:</strong>
-	  <%= @article.description %>
-	</p>
-
-	<p>
-	  <strong>Site Name:</strong>
-	  <%= @article.site_name %>
-	</p>
-
-	<p>
-	  <strong>Image URL:</strong>
-	  <%= @article.image %>
-	</p>
-
-	<p>
-	  <strong>Updated Time:</strong>
-	  <%= @article.updated_time %>
-	</p>
-
-	<p>
-	  <strong>List:</strong>
-	  <%= @article.list_id.title %>
-	</p>
-
-	<% if @article.user == current_user %>
-		<%= link_to 'Edit', edit_article_path(@article) %> |
-		<%= link_to 'Back', articles_path %>
-	<% end %>
-
+	<div class="row">
+		<div class="offset-md-2 col-md-8">
+			<div class="card">
+			  <div class="card-body">
+			    <h5 class="card-title"><%= @article.title %></h5>
+			    <h6 class="card-subtitle mb-2 text-muted"><%= @article.site_name %></h6>
+			    <p class="card-text"><%= @article.description %></p>
+			    <%= link_to 'Read More', @article.url %>  
+		    	<% if @article.user == current_user %>
+						| <%= link_to 'Edit', edit_article_path(@article) %>
+						| <%= link_to 'Back', articles_path %>
+					<% end %>
+			  </div>
+			</div>
+		</div>
+	</div>
 </div>
